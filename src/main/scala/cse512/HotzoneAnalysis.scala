@@ -32,11 +32,13 @@ object HotzoneAnalysis {
     // Group the result of Join operation in the previous step by rectangle and sort according to rectangle
     // Obtain the count of the number of points that lies within each rectangle
     // Return the DataFrame with rectangle and the corresponding count of number of points that lies within the rectangle
-    // Using persist() to optimize query involving long chains of transformations
-    val orderedHotZoneDf = spark.sql("select rectangle,count(point) as numberOfPoints from joinResult group by rectangle order by rectangle").persist()
-    orderedHotZoneDf.createOrReplaceTempView("HotZoneResult")
+    // Use persist() to optimize query involving long chains of transformations
+    // Use coalesce() to combine results from all the partitions into a single partition
+    val pointsCountSortedByRectangleDf = spark.sql("select rectangle,count(point) as numberOfPoints from joinResult group by rectangle order by rectangle asc").persist().coalesce(1)
+    pointsCountSortedByRectangleDf.createOrReplaceTempView("HotZoneResult")
+    pointsCountSortedByRectangleDf.show()
 
-    return orderedHotZoneDf
+    return pointsCountSortedByRectangleDf
   }
 
 }
