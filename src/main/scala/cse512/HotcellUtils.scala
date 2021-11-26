@@ -47,5 +47,36 @@ object HotcellUtils {
     return calendar.get(Calendar.DAY_OF_MONTH)
   }
 
-  // YOU NEED TO CHANGE THIS PART
+  /**
+  * Function to calculate the number of adjacent cells for a given cell
+  */
+  def calculateNumberOfAdjacentCells( minX: Int,  maxX: Int, minY: Int, maxY: Int, minZ: Int, maxZ: Int, X: Int, Y: Int, Z: Int): Int = {
+    var adjAxisBoundariesCount = 0
+
+    // cell lies on X-boundary
+    if (X == minX || X == maxX) {
+      adjAxisBoundariesCount += 1
+    }
+    // cell lies on Y-boundary
+    if (Y == minY || Y == maxY) {
+      adjAxisBoundariesCount += 1
+    }
+    // cell lies on Z-boundary
+    if (Z == minZ || Z == maxZ) {
+      adjAxisBoundariesCount += 1
+    }
+
+    adjAxisBoundariesCount match {
+      // cell does not lie on any of the axis boundaries => number of adjacent hot cells is 27
+      case 0 => 27
+      // cell lies on one of the axis boundaries => number of adjacent hot cells is 18
+      case 1 => 18
+      // cell lies on two of the axis boundaries => number of adjacent hot cells is 12
+      case 2 => 12
+      // cell lies on three of the axis boundaries => number of adjacent hot cells is 8
+      case 3 => 8
+      // default case, cell cannot lie on more than three axis boundaries
+      case _ => 0
+    }
+  }
 }
