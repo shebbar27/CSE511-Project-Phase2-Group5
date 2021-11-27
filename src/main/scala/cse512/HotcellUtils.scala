@@ -79,4 +79,13 @@ object HotcellUtils {
       case _ => 0
     }
   }
+
+  /**
+   * function to calculate the GScore for a given cell
+   */
+  def calculateGScore(numOfCells: Int, x: Int, y: Int, z: Int, sumOfAdjacentCells: Int, cellNumber: Int , avg: Double, stdDev: Double): Double = {
+     (cellNumber.toDouble - (avg * sumOfAdjacentCells.toDouble)) / (stdDev
+       * math.sqrt((( numOfCells.toDouble * sumOfAdjacentCells.toDouble)
+       - (sumOfAdjacentCells.toDouble * sumOfAdjacentCells.toDouble)) / (numOfCells.toDouble - 1.0)))
+  }
 }
