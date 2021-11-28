@@ -1,0 +1,1 @@
+spark-submit CSE511-Project-Phase2-Group5-assembly-0.1.0.jar test/output hotzoneanalysis src/resources/point-hotzone.csv src/resources/zone-hotzone.csv hotcellanalysis src/resources/yellow-trip-data-2009-01-point.csv
