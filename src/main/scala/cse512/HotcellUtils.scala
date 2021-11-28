@@ -68,13 +68,13 @@ object HotcellUtils {
 
     adjAxisBoundariesCount match {
       // cell does not lie on any of the axis boundaries => number of adjacent hot cells is 27
-      case 0 => 27
+      case 0 => 26
       // cell lies on one of the axis boundaries => number of adjacent hot cells is 18
-      case 1 => 18
+      case 1 => 17
       // cell lies on two of the axis boundaries => number of adjacent hot cells is 12
-      case 2 => 12
+      case 2 => 11
       // cell lies on three of the axis boundaries => number of adjacent hot cells is 8
-      case 3 => 8
+      case 3 => 7
       // default case, cell cannot lie on more than three axis boundaries
       case _ => 0
     }
